@@ -1,4 +1,4 @@
-package com.example.madlevel6task2
+package com.example.madlevel6task2.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,14 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.madlevel6task2.databinding.FragmentMovieDetailBinding
+import com.example.madlevel6task2.databinding.FragmentMovieListBinding
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class MovieDetailFragment : Fragment() {
+class MovieListFragment : Fragment() {
 
-    private var _binding: FragmentMovieDetailBinding? = null
+    private var _binding: FragmentMovieListBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,7 +24,7 @@ class MovieDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
+        _binding = FragmentMovieListBinding.inflate(inflater, container, false)
         return binding.root
 
     }
