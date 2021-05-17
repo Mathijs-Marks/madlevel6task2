@@ -10,7 +10,7 @@ class MovieApi {
 
     companion object {
         // The base url of the API.
-        private const val baseUrl = "https://themoviedb.org/"
+        private const val baseUrl = "https://api.themoviedb.org/"
 
         /**
          * @return [MovieApiService] The service class of the retrofit client.

@@ -12,3 +12,7 @@ data class MovieItem (
     @SerializedName("rating") var rating: Int,
     @SerializedName("overview") var overview: String
         )
+{
+    fun getBackdropPathUrl() = "https://image.tmdb.org/t/p/w500$backdropPath"
+    fun getPosterPathUrl() = "https://image.tmdb.org/t/p/w500$posterPath"
+}

@@ -11,26 +11,26 @@ class MovieRepository {
 
     private val movieApiService: MovieApiService = MovieApi.createApi()
 
-    private val _movie: MutableLiveData<MovieItem> = MutableLiveData()
+    private val _movieList: MutableLiveData<List<MovieItem>> = MutableLiveData()
 
     /**
      * Expose non MutableLiveData via getter
      * Encapsulation :)
      */
-    val movie: LiveData<MovieItem>
-        get() = _movie
+    val movieList: LiveData<List<MovieItem>>
+        get() = _movieList
 
     /**
      * Suspend function that calls a suspend function from the numbersApi call.
      */
-    suspend fun getMovieList() {
+    suspend fun getMovieList(year: Int) {
         try {
             // Timeout the request after 5 seconds
             val result = withTimeout(5_000) {
-                movieApiService.getMovieList()
+                movieApiService.getMovieList(year)
             }
 
-            _movie.value = result
+            _movieList.value = result.results
         } catch (error: Throwable) {
             throw MovieRefreshError("Unable to refresh movies", error)
         }

@@ -17,7 +17,7 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
      * This property points directly to the LiveData in the repository, that value
      * is updated when the user clicks on the FAB. This happens through the refreshNumber() in this class :)
      */
-    val movie = movieRepository.movie
+    val movieList = movieRepository.movieList
 
     private val _errorText: MutableLiveData<String> = MutableLiveData()
 
@@ -33,12 +33,12 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
      * The viewModelScope is bound to Dispatchers.Main and will automatically be cancelled when the ViewModel is cleared.
      * Extension method of lifecycle-viewmodel-ktx library.
      */
-    fun getMovieList() {
+    fun getMovieList(year: Int) {
         viewModelScope.launch {
             try {
                 // The movieRepository sets its own liveData property.
                 // Our own movie property points to this one.
-                movieRepository.getMovieList()
+                movieRepository.getMovieList(year)
             } catch (error: MovieRepository.MovieRefreshError) {
                 Log.e("Movie error", error.cause.toString())
             }
