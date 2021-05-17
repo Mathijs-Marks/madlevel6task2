@@ -20,7 +20,8 @@
             android:id="@+id/tvMovieNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/movie_number" />
+            android:text="@string/movie_number"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/ivMoviePoster"

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,14 +16,20 @@ import com.example.madlevel6task2.databinding.FragmentMovieListBinding
 import com.example.madlevel6task2.model.MovieItem
 import com.example.madlevel6task2.viewmodel.MovieViewModel
 import java.lang.Math.floor
+import androidx.fragment.app.setFragmentResult
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
+
+const val REQ_MOVIE_KEY = "req_movie"
+const val BUNDLE_MOVIE_KEY = "bundle_movie"
+
 class MovieListFragment : Fragment() {
 
     private val movies = arrayListOf<MovieItem>()
-    private lateinit var movieAdapter: MovieAdapter
+    //private lateinit var movieAdapter: MovieAdapter
+    private var movieAdapter = MovieAdapter(movies) { movieItem: MovieItem -> onMovieClick(movieItem) }
     private val viewModel: MovieViewModel by activityViewModels()
     private var _binding: FragmentMovieListBinding? = null
     // This property is only valid between onCreateView and
@@ -68,6 +75,7 @@ class MovieListFragment : Fragment() {
     }
 
     private fun onMovieClick(movieItem: MovieItem) {
+        onRetrieveMovie()
         findNavController().navigate(R.id.action_movieListFragment_to_movieDetailFragment)
     }
 
@@ -89,5 +97,10 @@ class MovieListFragment : Fragment() {
             movieAdapter.notifyDataSetChanged()
 
         })
+    }
+
+    private fun onRetrieveMovie() {
+        val movie = MovieItem(backdropPath = String(), posterPath = String(), title = String(), releaseDate = String(), rating = Int, overview = String())
+        setFragmentResult(REQ_MOVIE_KEY, bundleOf(Pair(BUNDLE_MOVIE_KEY, movie)))
     }
 }
