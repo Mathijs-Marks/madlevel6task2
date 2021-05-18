@@ -15,5 +15,6 @@
     <string name="movie_backdrop">This is the backdrop image of the movie.</string>
     <string name="movie_poster">This is the poster image of the movie.</string>
     <string name="movie_number">Number.</string>
+    <string name="rating">★ %s</string>
 
 </resources>

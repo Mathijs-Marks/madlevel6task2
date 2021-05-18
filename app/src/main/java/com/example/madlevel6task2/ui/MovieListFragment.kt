@@ -28,8 +28,7 @@ const val BUNDLE_MOVIE_KEY = "bundle_movie"
 class MovieListFragment : Fragment() {
 
     private val movies = arrayListOf<MovieItem>()
-    //private lateinit var movieAdapter: MovieAdapter
-    private var movieAdapter = MovieAdapter(movies) { movieItem: MovieItem -> onMovieClick(movieItem) }
+    private lateinit var movieAdapter: MovieAdapter
     private val viewModel: MovieViewModel by activityViewModels()
     private var _binding: FragmentMovieListBinding? = null
     // This property is only valid between onCreateView and
@@ -75,7 +74,7 @@ class MovieListFragment : Fragment() {
     }
 
     private fun onMovieClick(movieItem: MovieItem) {
-        onRetrieveMovie()
+        onRetrieveMovie(movieItem)
         findNavController().navigate(R.id.action_movieListFragment_to_movieDetailFragment)
     }
 
@@ -99,8 +98,8 @@ class MovieListFragment : Fragment() {
         })
     }
 
-    private fun onRetrieveMovie() {
-        val movie = MovieItem(backdropPath = String(), posterPath = String(), title = String(), releaseDate = String(), rating = Int, overview = String())
+    private fun onRetrieveMovie(movieItem: MovieItem) {
+        val movie = movieItem
         setFragmentResult(REQ_MOVIE_KEY, bundleOf(Pair(BUNDLE_MOVIE_KEY, movie)))
     }
 }

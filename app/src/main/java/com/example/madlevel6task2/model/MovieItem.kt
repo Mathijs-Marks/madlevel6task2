@@ -11,7 +11,7 @@ data class MovieItem(
     @SerializedName("poster_path") var posterPath: String,
     @SerializedName("title") var title: String,
     @SerializedName("release_date") var releaseDate: String,
-    @SerializedName("rating") var rating: Int.Companion,
+    @SerializedName("vote_average") var rating: Double,
     @SerializedName("overview") var overview: String
         ) : Parcelable
 {

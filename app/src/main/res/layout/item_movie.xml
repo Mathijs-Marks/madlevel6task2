@@ -24,7 +24,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/ivMoviePoster"
+            android:id="@+id/ivMoviePosterItem"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:contentDescription="@string/movie_poster"
