@@ -19,7 +19,8 @@ import java.lang.Math.floor
 import androidx.fragment.app.setFragmentResult
 
 /**
- * A simple [Fragment] subclass as the default destination in the navigation.
+ * This class makes use of the RecyclerView to display a list of movies.
+ * To retrieve the list, input a year into the editTextField and press the submit button.
  */
 
 const val REQ_MOVIE_KEY = "req_movie"
@@ -45,6 +46,9 @@ class MovieListFragment : Fragment() {
 
     }
 
+    // When the view is created, set up the RecyclerView in a Grid layout.
+    // On clicking the submit button, retrieve the list of movies from the API and populate them in the RecyclerView.
+    // When switching between vertical and horizontal layout, the Grid layout is adjusted accordingly.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -68,16 +72,19 @@ class MovieListFragment : Fragment() {
         }
     }
 
+    // Used to safely switch between fragments.
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
+    // Upon clicking a movie item, navigate towards the MovieDetailFragment.
     private fun onMovieClick(movieItem: MovieItem) {
         onRetrieveMovie(movieItem)
         findNavController().navigate(R.id.action_movieListFragment_to_movieDetailFragment)
     }
 
+    // Calculate the size of the Grid layout for the vertical and horizontal views.
     private fun calculateSpanCount(): Int {
         val viewWidth = binding.rvMovies.measuredWidth
         val cardViewWidth = resources.getDimension(R.dimen.poster_width)
@@ -86,6 +93,7 @@ class MovieListFragment : Fragment() {
         return if (spanCount >= 1) spanCount else 1
     }
 
+    // Tell the ViewModel to retrieve the list of movies from the API, and populate them in the RecyclerView.
     private fun observeMovies() {
 
         viewModel.getMovieList(binding.etMovieYear.text.toString().toInt())
@@ -98,6 +106,7 @@ class MovieListFragment : Fragment() {
         })
     }
 
+    // When clicking a movie item, create a bundle of the clicked item, and send it to the other fragment.
     private fun onRetrieveMovie(movieItem: MovieItem) {
         val movie = movieItem
         setFragmentResult(REQ_MOVIE_KEY, bundleOf(Pair(BUNDLE_MOVIE_KEY, movie)))

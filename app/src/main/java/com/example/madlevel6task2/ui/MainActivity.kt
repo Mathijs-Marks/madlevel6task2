@@ -13,6 +13,10 @@ import com.example.madlevel6task2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    /**
+     * This class is responsible for setting up the main UI components of the app.
+     */
+
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 

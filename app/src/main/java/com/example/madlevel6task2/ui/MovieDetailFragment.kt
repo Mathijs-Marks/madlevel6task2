@@ -16,7 +16,7 @@ import com.example.madlevel6task2.model.MovieItem
 import com.example.madlevel6task2.viewmodel.MovieViewModel
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ * This class is used to display a detailed view of a movie that is received from the API.
  */
 class MovieDetailFragment : Fragment() {
 
@@ -36,16 +36,19 @@ class MovieDetailFragment : Fragment() {
 
     }
 
+    // When the View is created, retrieve the list of movies.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeRetrieveMovieResult()
     }
 
+    // Used to safely switch between fragments.
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
+    // Make use of bundles to retrieve the desired movie from the list of the MovieListFragment.
     private fun observeRetrieveMovieResult() {
         setFragmentResultListener(REQ_MOVIE_KEY) { _, bundle ->
             bundle.getParcelable<MovieItem>(BUNDLE_MOVIE_KEY)?.let {
@@ -55,6 +58,7 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
+    // Put the components of the movie item into the correct places in the layout file.
     private fun populateMovieDetailFragment() {
 
         Glide.with(requireContext()).load(movie.getBackdropPathUrl()).into(binding.ivMovieBackdrop)

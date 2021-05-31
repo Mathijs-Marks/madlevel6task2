@@ -11,6 +11,10 @@ import kotlinx.coroutines.launch
 
 class MovieViewModel(application: Application) : AndroidViewModel(application) {
 
+    /**
+     * This class contains all business code that are used in the fragments.
+     */
+
     private val movieRepository = MovieRepository()
 
     /**

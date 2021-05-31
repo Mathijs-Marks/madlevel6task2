@@ -9,6 +9,12 @@ import kotlinx.coroutines.withTimeout
 
 class MovieRepository {
 
+    /**
+     * This is the class that contains the necessary methods to send a request to the API.
+     * The method in this class uses the MovieApiService class to send a GET request.
+     * The returned data is saved into the data model.
+     */
+
     private val movieApiService: MovieApiService = MovieApi.createApi()
 
     private val _movieList: MutableLiveData<List<MovieItem>> = MutableLiveData()
